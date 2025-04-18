@@ -33,6 +33,7 @@ app.use((req, res, next) => {
   ) {
     return res.status(403).send();
   }
+  next();
 });
 
 routes(app);

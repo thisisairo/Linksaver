@@ -1,8 +1,11 @@
 const mongoose = require("mongoose");
 require("dotenv/config");
 
+require("./models/user");
+require("./models/token");
 const db = require("./utils/db");
 
+require("./models/user");
 const app = require("./app");
 
 async function main() {
