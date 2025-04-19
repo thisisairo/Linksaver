@@ -3,7 +3,7 @@ import axios from "axios";
 
 const apiBase = import.meta.env.VITE_API_URL;
 
-const useApi = () => {
+export const useApi = () => {
   const [loading, setLoading] = useState(false);
 
   const defaultHeaders = {
@@ -13,7 +13,7 @@ const useApi = () => {
 
   return {
     loading,
-    postRequest: async (path, data) => {
+    postRequest: async (path: string, data: any) => {
       setLoading(true);
       return axios
         .post(`${apiBase}/${path}`, data, {
@@ -29,7 +29,7 @@ const useApi = () => {
           throw err;
         });
     },
-    putRequest: async (path, data) => {
+    putRequest: async (path: string, data: any) => {
       setLoading(true);
       return axios
         .put(`${apiBase}/${path}`, data, {
@@ -45,7 +45,7 @@ const useApi = () => {
           throw err;
         });
     },
-    getRequest: async (path) => {
+    getRequest: async (path: string) => {
       setLoading(true);
       return axios
         .get(`${apiBase}/${path}`, {
@@ -61,7 +61,7 @@ const useApi = () => {
           throw err;
         });
     },
-    deleteRequest: async (path) => {
+    deleteRequest: async (path: string) => {
       setLoading(true);
       return axios
         .delete(`${apiBase}/${path}`, {
