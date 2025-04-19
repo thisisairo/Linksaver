@@ -6,6 +6,7 @@ const {
   generateToken,
 } = require("../../utils/crypto");
 const { parseUser } = require("../../utils/parse-user");
+const { sendVerification } = require("../../utils/mail");
 
 const User = mongoose.model("User");
 const Token = mongoose.model("Token");
@@ -28,9 +29,14 @@ exports.register = async (req, res) => {
     password: hashedPassword,
   });
 
-  await Token.create({
+  const { token: emailToken } = await Token.create({
     user: user._id,
     token: generateCryptoToken(),
+  });
+
+  await sendVerification({
+    email: user.email,
+    token: emailToken,
   });
 
   const token = generateToken(user);
